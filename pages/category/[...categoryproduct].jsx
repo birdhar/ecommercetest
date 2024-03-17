@@ -217,3 +217,11 @@
 // }
 
 // export default Categoryproduct;
+
+import React from "react";
+
+function Categoryproduct() {
+  return <div>Categoryproduct</div>;
+}
+
+export default Categoryproduct;

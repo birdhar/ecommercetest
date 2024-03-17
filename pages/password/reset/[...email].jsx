@@ -203,3 +203,11 @@
 // export default dynamic(() => Promise.resolve(ResetPassword), { ssr: false });
 
 // // ResetPassword;
+
+import React from "react";
+
+function ResetPassword() {
+  return <div>ResetPassword</div>;
+}
+
+export default ResetPassword;
