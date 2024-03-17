@@ -1,0 +1,112 @@
+.herosection {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  min-height: 90vh;
+  box-sizing: border-box;
+  /* background-color: rgb(243, 241, 241); */
+}
+.herotextcontainer {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  padding: 4rem;
+  justify-content: center;
+}
+.herotext {
+  color: #415161;
+  text-align: left;
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 120%;
+}
+.heroimagecontainer {
+  width: 50%;
+  display: grid;
+  place-items: center;
+}
+.heroimage {
+  height: 25rem;
+}
+.carouselBtn {
+  display: none;
+}
+.orderbtn {
+  margin-top: 2rem;
+  background-image: linear-gradient(
+    to right,
+    #f37d7d 0%,
+    #f16868 51%,
+    #c75555 100% /* #5f849e 0%,
+    #6592b2 51%,
+    #7aa1bd 100% */
+  );
+  font-size: 0.9rem;
+  width: fit-content;
+  padding: 0.5rem 1rem;
+  border-radius: 1.2rem;
+  color: #fff;
+  box-shadow: 0 0 20px #eee;
+}
+.orderbtn:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+
+@media only screen and (max-width: 1240px) {
+  .herotextcontainer {
+    padding-right: 0;
+  }
+}
+
+@media only screen and (max-width: 1180px) {
+  .herotext {
+    font-size: 3.5rem;
+  }
+}
+
+@media only screen and (max-width: 980px) {
+  .herotext {
+    font-size: 3rem;
+  }
+  .heroimage {
+    height: 20rem;
+  }
+}
+
+@media only screen and (max-width: 844px) {
+  .herotext {
+    font-size: 2.8rem;
+  }
+  .heroimage {
+    height: 17rem;
+  }
+  .herotextcontainer {
+    padding: 2rem;
+  }
+}
+@media only screen and (max-width: 640px) {
+  .herosection {
+    flex-direction: column-reverse;
+  }
+  .herotextcontainer,
+  .heroimagecontainer {
+    width: 100%;
+  }
+  .herotextcontainer {
+    align-items: center;
+  }
+  .herotext {
+    text-align: center;
+  }
+}
+@media only screen and (max-width: 400px) {
+  .herotext {
+    font-size: 2.5rem;
+  }
+  .heroimage {
+    height: 15rem;
+  }
+}

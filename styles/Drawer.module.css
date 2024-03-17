@@ -1,0 +1,49 @@
+.drawer {
+  width: 25vw;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.drawerheader {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem;
+  border-bottom: 0.1px solid rgb(224, 221, 221);
+}
+.drawerlist {
+  margin-top: 2rem;
+}
+.listitem {
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+}
+.listitemanchor {
+  color: #415161;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+.listitemanchorActive {
+  color: #f2295b;
+}
+.closeimg {
+  height: 1.2rem;
+  cursor: pointer;
+}
+.searchbar {
+  padding: 0.5rem;
+}
+.cartimg {
+  color: #f2295b;
+}
+.logout {
+  width: 100%;
+  background-color: rgb(194, 110, 113);
+  padding: 0.75rem;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  color: aliceblue;
+  font-size: 0.8rem;
+}
