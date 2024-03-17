@@ -33,22 +33,22 @@ function Home(params) {
   );
 }
 
-export async function getServerSideProps({ req }) {
-  const session = await getSession({ req });
+// export async function getServerSideProps({ req }) {
+//   const session = await getSession({ req });
 
-  if (!session) {
-    return {
-      redirect: {
-        destination: `/login?next=${"/"}`,
-        permanent: false,
-      },
-    };
-  }
-  return {
-    props: {
-      session,
-    },
-  };
-}
+//   if (!session) {
+//     return {
+//       redirect: {
+//         destination: `/login?next=${"/"}`,
+//         permanent: false,
+//       },
+//     };
+//   }
+//   return {
+//     props: {
+//       session,
+//     },
+//   };
+// }
 
 export default Home;
