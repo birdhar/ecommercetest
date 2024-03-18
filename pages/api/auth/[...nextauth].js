@@ -30,17 +30,17 @@ export const authproviders = {
 
         const user = await User.findOne({ email: credentials.email });
 
-        // if (!user) {
-        //   throw new Error("No user found");
-        // }
-        // const correctPassword = await bcrypt.compare(
-        //   credentials.password,
-        //   user.password
-        // );
+        if (!user) {
+          throw new Error("No user found");
+        }
+        const correctPassword = await bcrypt.compare(
+          credentials.password,
+          user.password
+        );
 
-        // if (!correctPassword || credentials.email !== user.email) {
-        //   throw new Error("Invalid credentials");
-        // }
+        if (!correctPassword || credentials.email !== user.email) {
+          throw new Error("Invalid credentials");
+        }
         return user;
       },
     }),
