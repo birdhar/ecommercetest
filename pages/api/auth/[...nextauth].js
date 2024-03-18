@@ -63,7 +63,7 @@ export const authproviders = {
   //   },
   // },
 
-  // adapter: MongoDBAdapter(clientPromise),
+  adapter: MongoDBAdapter(clientPromise),
 };
 
 // --------------------------------------------------
