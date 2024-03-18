@@ -63,7 +63,7 @@ function Header() {
           <p className="text-[#f16868] text-[1.53rem] font-semibold">EMart</p>
         </Link>
 
-        {/* <div className="flex gap-10">
+        <div className="flex gap-10">
           <ul className="mt-1 hidden gap-10 lg:flex">
             <li className="">
               <Link
@@ -174,7 +174,7 @@ function Header() {
               clipRule="evenodd"
             />
           </svg>
-        </div> */}
+        </div>
       </header>
       {/* <Drawer open={openDrawer} onClose={() => setOpenDrawer(false)} /> */}
     </>
