@@ -46,20 +46,20 @@ export const authproviders = {
     }),
   ],
 
-  // session: {
-  //   strategy: "jwt",
-  // },
+  session: {
+    strategy: "jwt",
+  },
 
-  // callbacks: {
-  //   async jwt({ token, user }) {
-  //     return { ...token, ...user };
-  //   },
-  //   async session({ session, token, user }) {
-  //     session.user.role = token.role;
+  callbacks: {
+    async jwt({ token, user }) {
+      return { ...token, ...user };
+    },
+    async session({ session, token, user }) {
+      session.user.role = token.role;
 
-  //     return session;
-  //   },
-  // },
+      return session;
+    },
+  },
 
   adapter: MongoDBAdapter(clientPromise),
 };
