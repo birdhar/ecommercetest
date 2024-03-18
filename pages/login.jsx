@@ -28,6 +28,9 @@ function Login() {
       redirect: false,
       callbackUrl: "/",
     });
+
+    console.log(res);
+    setLoading(false);
     // if (res.ok) {
     //   router.push(next || "/");
     //   setLoading(false);
