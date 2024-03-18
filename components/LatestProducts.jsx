@@ -8,13 +8,13 @@ import Link from "next/link";
 
 function LatestProducts() {
   const [products, setProducts] = useState([]);
-  // useEffect(() => {
-  //   AOS.init();
-  //   axios.get("/api/latestproducts").then((res) => {
-  //     // setProducts(res.data);
-  //     setProducts(res.data);
-  //   });
-  // }, []);
+  useEffect(() => {
+    AOS.init();
+    axios.get("/api/latestproducts").then((res) => {
+      // setProducts(res.data);
+      setProducts(res.data);
+    });
+  }, []);
 
   return (
     <div className={style.newproductcontainer}>

@@ -54,7 +54,7 @@ function Header() {
   useEffect(() => {
     dispatch(getCartTotal());
   }, [items]);
-  console.log(categories);
+
   return (
     <>
       <header className="bg-[#ffffff] sticky z-10 shadow-[0 4px 12px 0 rgba(0,0,0,.05)] border-b border-gray-100 top-0 p-4 px-4 flex items-center justify-between w-full sm:px-8">
