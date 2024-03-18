@@ -20,14 +20,14 @@ function Login() {
   });
 
   const handleSubmit = async (e) => {
-    // e.preventDefault();
-    // setLoading(true);
-    // const res = await signIn("credentials", {
-    //   email: loginData.email,
-    //   password: loginData.password,
-    //   redirect: false,
-    //   callbackUrl: "/",
-    // });
+    e.preventDefault();
+    setLoading(true);
+    const res = await signIn("credentials", {
+      email: loginData.email,
+      password: loginData.password,
+      redirect: false,
+      callbackUrl: "/",
+    });
     // if (res.ok) {
     //   router.push(next || "/");
     //   setLoading(false);
