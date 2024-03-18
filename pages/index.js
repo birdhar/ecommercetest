@@ -1,4 +1,5 @@
 import Layout from "@/components/Layout";
+import { mongooseConnect } from "@/lib/mongoose";
 import { getSession, useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 import Head from "next/head";
@@ -10,7 +11,15 @@ const HeroSection = dynamic(() => import("@/components/Herosection"));
 
 function Home(params) {
   const { data: session } = useSession();
-  console.log(session);
+
+  // mongooseConnect()
+  //   .then((res) => {
+  //     console.log(res);
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   });
+
   return (
     <>
       <Head>
@@ -54,4 +63,4 @@ function Home(params) {
 //   };
 // }
 
-export default Home;
+export default dynamic(() => Promise.resolve(Home), { ssr: false });
