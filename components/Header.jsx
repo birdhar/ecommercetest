@@ -2,7 +2,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 // import Drawer from "./Drawer";
 import { useRouter } from "next/router";
-// import axios from "axios";
+import axios from "axios";
 // import { useDispatch, useSelector } from "react-redux";
 // import { getCartTotal } from "@/redux/cartSlice";
 function Header() {
@@ -20,23 +20,23 @@ function Header() {
     status: "error",
   });
 
-  // useEffect(() => {
-  //   fetchCategories();
-  // }, []);
+  useEffect(() => {
+    fetchCategories();
+  }, []);
 
-  // const fetchCategories = async () => {
-  //   try {
-  //     const res = await axios.get("/api/categories");
+  const fetchCategories = async () => {
+    try {
+      const res = await axios.get("/api/categories");
 
-  //     setCategories(res.data);
-  //   } catch (error) {
-  //     setNotificationState({
-  //       msg: error?.response?.data?.error ?? "Unauthorized access",
-  //       run: true,
-  //       status: "error",
-  //     });
-  //   }
-  // };
+      setCategories(res.data);
+    } catch (error) {
+      setNotificationState({
+        msg: error?.response?.data?.error ?? "Unauthorized access",
+        run: true,
+        status: "error",
+      });
+    }
+  };
   // useEffect(() => {
   //   const delay = setTimeout(() => {
   //     const filtered = categories?.filter((item) =>
@@ -54,7 +54,7 @@ function Header() {
   // useEffect(() => {
   //   dispatch(getCartTotal());
   // }, [items]);
-
+  console.log(categories);
   return (
     <>
       <header className="bg-[#ffffff] sticky z-10 shadow-[0 4px 12px 0 rgba(0,0,0,.05)] border-b border-gray-100 top-0 p-4 px-4 flex items-center justify-between w-full sm:px-8">
