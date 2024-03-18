@@ -11,8 +11,8 @@ export const authproviders = {
   secret: process.env.NEXTAUTH_SECRET,
   providers: [
     GoogleProvider({
-      clientId: process.env.NEW_GOOGLE_ID,
-      clientSecret: process.env.NEW_GOOGLE_SECRET,
+      clientId: process.env.GOOGLE_ID,
+      clientSecret: process.env.GOOGLE_SECRET,
       profile(profile) {
         return {
           id: profile.sub,
@@ -30,19 +30,17 @@ export const authproviders = {
 
         const user = await User.findOne({ email: credentials.email });
 
-        // const user = {};
+        if (!user) {
+          throw new Error("No user found");
+        }
+        const correctPassword = await bcrypt.compare(
+          credentials.password,
+          user.password
+        );
 
-        // if (!user) {
-        //   throw new Error("No user found");
-        // }
-        // const correctPassword = await bcrypt.compare(
-        //   credentials.password,
-        //   user.password
-        // );
-
-        // if (!correctPassword || credentials.email !== user.email) {
-        //   throw new Error("Invalid credentials");
-        // }
+        if (!correctPassword || credentials.email !== user.email) {
+          throw new Error("Invalid credentials");
+        }
         return user;
       },
     }),
