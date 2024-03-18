@@ -69,7 +69,37 @@ export const authproviders = {
     GoogleProvider({
       clientId: process.env.GOOGLE_ID,
       clientSecret: process.env.GOOGLE_SECRET,
+      profile(profile) {
+        return {
+          id: profile.sub,
+          name: profile.name,
+          email: profile.email,
+          image: profile.picture,
+          role: profile.role ?? "User",
+        };
+      },
     }),
+    //     CredentialsProvider({
+    //   name: "Credentials",
+    //   async authorize(credentials) {
+    //     await mongooseConnect();
+
+    //     const user = await User.findOne({ email: credentials.email });
+
+    //     if (!user) {
+    //       throw new Error("No user found");
+    //     }
+    //     const correctPassword = await bcrypt.compare(
+    //       credentials.password,
+    //       user.password
+    //     );
+
+    //     if (!correctPassword || credentials.email !== user.email) {
+    //       throw new Error("Invalid credentials");
+    //     }
+    //     return user;
+    //   },
+    // }),
   ],
   adapter: MongoDBAdapter(clientPromise),
 };
