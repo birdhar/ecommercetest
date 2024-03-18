@@ -7,13 +7,22 @@ import "aos/dist/aos.css";
 import Link from "next/link";
 
 function LatestProducts() {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState([
+    {
+      _id: "123424444444442",
+      image: "https://ecommercenext-birat.s3.amazonaws.com/1709671396105.jpg",
+      price: 500,
+      description: "sefhedvnk dgvui dfxh",
+      name: "kvdfv isdhvid v",
+      rating: 4,
+    },
+  ]);
   useEffect(() => {
     AOS.init();
-    axios.get("/api/latestproducts").then((res) => {
-      // setProducts(res.data);
-      setProducts(res.data);
-    });
+    // axios.get("/api/latestproducts").then((res) => {
+    //   // setProducts(res.data);
+    //   setProducts(res.data);
+    // });
   }, []);
 
   return (
