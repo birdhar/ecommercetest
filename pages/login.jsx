@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { getSession, signIn } from "next-auth/react";
+// import { getSession, signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 import { Notfication } from "@/validation/Snackbar";
 import Head from "next/head";
@@ -20,30 +20,29 @@ function Login() {
   });
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    const res = await signIn("credentials", {
-      email: loginData.email,
-      password: loginData.password,
-      redirect: false,
-      callbackUrl: "/",
-    });
-
-    if (res.ok) {
-      router.push("/");
-      setLoading(false);
-    } else {
-      setNotificationState({
-        msg: res.error,
-        run: true,
-        status: "error",
-      });
-      setLoading(false);
-    }
+    // e.preventDefault();
+    // setLoading(true);
+    // const res = await signIn("credentials", {
+    //   email: loginData.email,
+    //   password: loginData.password,
+    //   redirect: false,
+    //   callbackUrl: "/",
+    // });
+    // if (res.ok) {
+    //   router.push("/");
+    //   setLoading(false);
+    // } else {
+    //   setNotificationState({
+    //     msg: res.error,
+    //     run: true,
+    //     status: "error",
+    //   });
+    //   setLoading(false);
+    // }
   };
 
   const handleGoogleSignIn = async () => {
-    await signIn("google", { callbackUrl: "/" });
+    // await signIn("google", { callbackUrl: "/" });
   };
 
   return (

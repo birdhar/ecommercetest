@@ -1,5 +1,5 @@
 import Layout from "@/components/Layout";
-import { mongooseConnect } from "@/lib/mongoose";
+
 import { getSession, useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 import Head from "next/head";
@@ -14,7 +14,6 @@ function Home(params) {
   console.log(session);
   return (
     <>
-      m
       <Head>
         <title>
           Shop the Latest Trends in Fashion, Electronics, Appliances and... |
@@ -38,22 +37,22 @@ function Home(params) {
   );
 }
 
-export async function getServerSideProps({ req }) {
-  const session = await getSession({ req });
+// export async function getServerSideProps({ req }) {
+//   const session = await getSession({ req });
 
-  if (!session) {
-    return {
-      redirect: {
-        destination: `/login?next=${"/"}`,
-        permanent: false,
-      },
-    };
-  }
-  return {
-    props: {
-      session,
-    },
-  };
-}
+//   if (!session) {
+//     return {
+//       redirect: {
+//         destination: `/login?next=${"/"}`,
+//         permanent: false,
+//       },
+//     };
+//   }
+//   return {
+//     props: {
+//       session,
+//     },
+//   };
+// }
 
 export default dynamic(() => Promise.resolve(Home), { ssr: false });
