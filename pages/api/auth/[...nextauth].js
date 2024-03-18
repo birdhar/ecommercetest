@@ -28,9 +28,9 @@ export const authproviders = {
       async authorize(credentials) {
         await mongooseConnect();
 
-        // const user = await User.findOne({ email: credentials.email });
+        const user = await User.findOne({ email: credentials.email });
 
-        const user = {};
+        // const user = {};
 
         // if (!user) {
         //   throw new Error("No user found");

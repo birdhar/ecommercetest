@@ -29,19 +29,17 @@ function Login() {
       callbackUrl: "/",
     });
 
-    console.log(res);
-    setLoading(false);
-    // if (res.ok) {
-    //   router.push(next || "/");
-    //   setLoading(false);
-    // } else {
-    //   setNotificationState({
-    //     msg: res.error,
-    //     run: true,
-    //     status: "error",
-    //   });
-    //   setLoading(false);
-    // }
+    if (res.ok) {
+      router.push("/");
+      setLoading(false);
+    } else {
+      setNotificationState({
+        msg: res.error,
+        run: true,
+        status: "error",
+      });
+      setLoading(false);
+    }
   };
 
   const handleGoogleSignIn = async () => {
