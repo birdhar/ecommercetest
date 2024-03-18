@@ -1,8 +1,8 @@
 import NextAuth, { getServerSession } from "next-auth";
-// import { MongoDBAdapter } from "@auth/mongodb-adapter";
+import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import GoogleProvider from "next-auth/providers/google";
 // import CredentialsProvider from "next-auth/providers/credentials";
-// import clientPromise from "@/lib/mongodb";
+import clientPromise from "@/lib/mongodb";
 // import bcrypt from "bcryptjs";
 // import { mongooseConnect } from "@/lib/mongoose";
 // import { User } from "@/models/User";
@@ -73,6 +73,7 @@ export const authproviders = {
       clientSecret: process.env.GOOGLE_SECRET,
     }),
   ],
+  adapter: MongoDBAdapter(clientPromise),
 };
 
 export default NextAuth(authproviders);
