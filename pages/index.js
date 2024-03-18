@@ -1,6 +1,6 @@
 import Layout from "@/components/Layout";
 
-// import { getSession, useSession } from "next-auth/react";
+import { getSession, useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 const HeroSection = dynamic(() => import("@/components/Herosection"));
@@ -10,8 +10,8 @@ const HeroSection = dynamic(() => import("@/components/Herosection"));
 // const AdSellFeature = dynamic(() => import("@/components/AdSellFeature"));
 
 function Home(params) {
-  // const { data: session } = useSession();
-  // console.log(session);
+  const { data: session } = useSession();
+  console.log(session);
   return (
     <>
       <Head>
