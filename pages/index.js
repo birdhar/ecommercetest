@@ -5,9 +5,9 @@ import dynamic from "next/dynamic";
 import Head from "next/head";
 const HeroSection = dynamic(() => import("@/components/Herosection"));
 const LatestProducts = dynamic(() => import("@/components/LatestProducts"));
-// const Notification = dynamic(() => import("@/components/Notification"));
-// const Categories = dynamic(() => import("@/components/Categories"));
-// const AdSellFeature = dynamic(() => import("@/components/AdSellFeature"));
+const Notification = dynamic(() => import("@/components/Notification"));
+const Categories = dynamic(() => import("@/components/Categories"));
+const AdSellFeature = dynamic(() => import("@/components/AdSellFeature"));
 
 function Home(params) {
   const { data: session } = useSession();
@@ -28,10 +28,9 @@ function Home(params) {
       <Layout>
         <HeroSection />
         <LatestProducts />
-        {/* 
         <AdSellFeature />
         <Categories />
-        <Notification /> */}
+        <Notification />
       </Layout>
     </>
   );
