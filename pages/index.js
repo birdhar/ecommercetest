@@ -9,6 +9,8 @@ const HeroSection = dynamic(() => import("@/components/Herosection"));
 // const AdSellFeature = dynamic(() => import("@/components/AdSellFeature"));
 
 function Home(params) {
+  const { data: session } = useSession();
+  console.log(session);
   return (
     <>
       <Head>
