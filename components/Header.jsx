@@ -12,7 +12,7 @@ function Header() {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredItems, setFilteredItems] = useState([]);
   const [categories, setCategories] = useState([]);
-  // const { totalQuantity, items } = useSelector((store) => store.cart);
+  const { totalQuantity, items } = useSelector((store) => store.cart);
 
   const [notificationState, setNotificationState] = useState({
     msg: "",
@@ -37,19 +37,19 @@ function Header() {
       });
     }
   };
-  // useEffect(() => {
-  //   const delay = setTimeout(() => {
-  //     const filtered = categories?.filter((item) =>
-  //       item?.name?.toLowerCase()?.includes(searchQuery?.toLowerCase())
-  //     );
-  //     setFilteredItems(filtered);
-  //   }, 1000);
+  useEffect(() => {
+    const delay = setTimeout(() => {
+      const filtered = categories?.filter((item) =>
+        item?.name?.toLowerCase()?.includes(searchQuery?.toLowerCase())
+      );
+      setFilteredItems(filtered);
+    }, 1000);
 
-  //   return () => clearTimeout(delay);
-  // }, [searchQuery, categories]);
-  // const handleClickRoute = (url) => {
-  //   router.push(url);
-  // };
+    return () => clearTimeout(delay);
+  }, [searchQuery, categories]);
+  const handleClickRoute = (url) => {
+    router.push(url);
+  };
 
   // useEffect(() => {
   //   dispatch(getCartTotal());
