@@ -28,19 +28,21 @@ export const authproviders = {
       async authorize(credentials) {
         await mongooseConnect();
 
-        const user = await User.findOne({ email: credentials.email });
+        const user = {};
 
-        if (!user) {
-          throw new Error("No user found");
-        }
-        const correctPassword = await bcrypt.compare(
-          credentials.password,
-          user.password
-        );
+        // const user = await User.findOne({ email: credentials.email });
 
-        if (!correctPassword || credentials.email !== user.email) {
-          throw new Error("Invalid credentials");
-        }
+        // if (!user) {
+        //   throw new Error("No user found");
+        // }
+        // const correctPassword = await bcrypt.compare(
+        //   credentials.password,
+        //   user.password
+        // );
+
+        // if (!correctPassword || credentials.email !== user.email) {
+        //   throw new Error("Invalid credentials");
+        // }
         return user;
       },
     }),
