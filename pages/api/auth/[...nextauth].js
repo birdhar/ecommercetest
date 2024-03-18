@@ -5,7 +5,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import clientPromise from "@/lib/mongodb";
 import bcrypt from "bcryptjs";
 import { mongooseConnect } from "@/lib/mongoose";
-// import { User } from "@/models/User";
+import { User } from "@/models/User";
 
 export const authproviders = {
   secret: process.env.NEXTAUTH_SECRET,
@@ -28,9 +28,7 @@ export const authproviders = {
       async authorize(credentials) {
         await mongooseConnect();
 
-        const user = {};
-
-        // const user = await User.findOne({ email: credentials.email });
+        const user = await User.findOne({ email: credentials.email });
 
         // if (!user) {
         //   throw new Error("No user found");
