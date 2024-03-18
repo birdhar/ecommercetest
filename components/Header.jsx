@@ -4,10 +4,10 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-// import { getCartTotal } from "@/redux/cartSlice";
+import { getCartTotal } from "@/redux/cartSlice";
 function Header() {
   const router = useRouter();
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [openDrawer, setOpenDrawer] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredItems, setFilteredItems] = useState([]);
@@ -51,9 +51,9 @@ function Header() {
     router.push(url);
   };
 
-  // useEffect(() => {
-  //   dispatch(getCartTotal());
-  // }, [items]);
+  useEffect(() => {
+    dispatch(getCartTotal());
+  }, [items]);
   console.log(categories);
   return (
     <>
