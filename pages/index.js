@@ -11,7 +11,7 @@ const HeroSection = dynamic(() => import("@/components/Herosection"));
 
 function Home(params) {
   const { data: session } = useSession();
-
+  console.log(session);
   return (
     <>
       m
