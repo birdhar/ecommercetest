@@ -4,8 +4,8 @@ import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import clientPromise from "@/lib/mongodb";
 import bcrypt from "bcryptjs";
-import { mongooseConnect } from "@/lib/mongoose";
-import { User } from "@/models/User";
+// import { mongooseConnect } from "@/lib/mongoose";
+// import { User } from "@/models/User";
 
 export const authproviders = {
   secret: process.env.NEXTAUTH_SECRET,
@@ -26,7 +26,7 @@ export const authproviders = {
     CredentialsProvider({
       name: "Credentials",
       async authorize(credentials) {
-        await mongooseConnect();
+        // await mongooseConnect();
 
         const user = {};
 
