@@ -7,7 +7,7 @@ import axios from "axios";
 import { useInView } from "react-intersection-observer";
 import { IndianRupeeFormatter } from "@/utils/IndianRupeeFormatter";
 import Link from "next/link";
-import { getSession } from "next-auth/react";
+import { getSession, useSession } from "next-auth/react";
 import { Skeleton } from "@mui/material";
 import Head from "next/head";
 
@@ -44,6 +44,7 @@ function AllProducts() {
     },
   ];
   const { ref, inView } = useInView();
+  const { data: session } = useSession();
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -82,6 +83,8 @@ function AllProducts() {
       setLoading(false);
     }
   });
+
+  console.log(session);
 
   // if (loading) {
   //   return (
