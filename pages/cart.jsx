@@ -12,7 +12,7 @@ import {
   getCartTotal,
 } from "@/redux/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { getSession } from "next-auth/react";
+import { getSession, useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 import useCartItems from "@/utils/useCartItems";
 import Head from "next/head";
@@ -20,6 +20,7 @@ import Head from "next/head";
 function Cart() {
   const router = useRouter();
   const dispatch = useDispatch();
+  const { data: session, status } = useSession();
   const { items, totalQuantity, totalAmount } = useCartItems();
   const [loading, setLoading] = useState(false);
   const [showFullText, setShowFullText] = useState(false);
@@ -148,6 +149,20 @@ function Cart() {
       });
     }
   };
+
+  useEffect(() => {
+    if (status === "loading") {
+      // Session is still loading, do nothing
+      return;
+    }
+
+    if (
+      (status === "authenticated" && !session) ||
+      status === "unauthenticated"
+    ) {
+      router.push(`/login?next=${router?.asPath}`);
+    }
+  }, [session, status]);
 
   if (items?.length <= 0) {
     return (

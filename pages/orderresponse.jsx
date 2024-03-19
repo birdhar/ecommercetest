@@ -8,12 +8,13 @@ import Link from "next/link";
 import { IndianRupeeFormatter } from "@/utils/IndianRupeeFormatter";
 import { useDispatch } from "react-redux";
 import { clearCart } from "@/redux/cartSlice";
-import { getSession } from "next-auth/react";
+import { getSession, useSession } from "next-auth/react";
 import Head from "next/head";
 
 function Checkout() {
   const router = useRouter();
   const dispatch = useDispatch();
+  const { data: session, status } = useSession();
   const [order, setOrder] = useState({});
   const [notificationState, setNotificationState] = useState({
     msg: "",
@@ -56,6 +57,20 @@ function Checkout() {
       updateOrder("Failed");
     }
   }, [router?.query]);
+
+  useEffect(() => {
+    if (status === "loading") {
+      // Session is still loading, do nothing
+      return;
+    }
+
+    if (
+      (status === "authenticated" && !session) ||
+      status === "unauthenticated"
+    ) {
+      router.push(`/login?next=${router?.asPath}`);
+    }
+  }, [session, status]);
 
   if (router?.query?.fail === "1") {
     return (
