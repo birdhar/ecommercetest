@@ -1,29 +1,3 @@
-// import React from "react";
-// import style from "../styles/Drawer.module.css";
-
-// function Drawer({ open, onClose }) {
-//   const anchor = "bottom";
-//   const toggleDrawer = (event) => {
-//     if (
-//       event.type === "keydown" &&
-//       (event.key === "Tab" || event.key === "Shift")
-//     ) {
-//       return;
-//     }
-//     onClose();
-//   };
-
-//   const list = (anchor) => <div className={style.drawer}>hi</div>;
-
-//   return (
-//     <Drawer anchor={anchor} open={open} onClose={toggleDrawer(anchor, false)}>
-//       {list(anchor)}
-//     </Drawer>
-//   );
-// }
-
-// export default Drawer;
-
 import * as React from "react";
 import { signOut } from "next-auth/react";
 import style from "../styles/Drawer.module.css";
