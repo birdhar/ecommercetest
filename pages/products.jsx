@@ -46,7 +46,7 @@ function AllProducts() {
     },
   ];
   const { ref, inView } = useInView();
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -148,11 +148,20 @@ function AllProducts() {
   // }
 
   useEffect(() => {
-    // if (!session) {
-    //   router(`/login?next=${"/products"}`);
-    // }
-    console.log(session);
-  }, []);
+    // Check if the session has been loaded
+    if (status === "loading") {
+      // Session is still loading, do nothing
+      return;
+    }
+
+    // Now the session is loaded, you can use it
+    if (
+      (status === "authenticated" && !session) ||
+      status === "unauthenticated"
+    ) {
+      router.push(`/login?next=${"/products"}`);
+    }
+  }, [session, status]);
 
   return (
     <>
