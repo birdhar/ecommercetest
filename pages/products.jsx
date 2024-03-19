@@ -59,29 +59,29 @@ function AllProducts() {
   //   fetchData(page);
   // }, [page]);
 
-  // const fetchData = useCallback(async (page, pageSize = 10) => {
-  //   setLoading(true);
-  //   try {
-  //     const response = await axios.get("/api/products", {
-  //       params: { page: page, limit: pageSize },
-  //     });
-  //     const newData = response.data;
-  //     if (page === 1) {
-  //       setProducts(newData);
-  //     } else {
-  //       setProducts((prevData) => [...prevData, ...newData]);
-  //     }
-  //     setInterval(() => {}, 1000);
-  //     if (newData.length === 0) {
-  //       setHasMore(false);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error fetching data:", error);
-  //     setLoading(false);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // });
+  const fetchData = useCallback(async (page, pageSize = 10) => {
+    setLoading(true);
+    try {
+      const response = await axios.get("/api/products", {
+        params: { page: page, limit: pageSize },
+      });
+      const newData = response.data;
+      if (page === 1) {
+        setProducts(newData);
+      } else {
+        setProducts((prevData) => [...prevData, ...newData]);
+      }
+      setInterval(() => {}, 1000);
+      if (newData.length === 0) {
+        setHasMore(false);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      setLoading(false);
+    } finally {
+      setLoading(false);
+    }
+  });
 
   // if (loading) {
   //   return (
