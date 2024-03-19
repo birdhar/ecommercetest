@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-// import Drawer from "./Drawer";
+import Drawer from "./Drawer";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
@@ -176,7 +176,7 @@ function Header() {
           </svg>
         </div>
       </header>
-      {/* <Drawer open={openDrawer} onClose={() => setOpenDrawer(false)} /> */}
+      <Drawer open={openDrawer} onClose={() => setOpenDrawer(false)} />
     </>
   );
 }
