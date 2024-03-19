@@ -86,8 +86,6 @@ function AllProducts() {
     }
   });
 
-  console.log(session);
-
   // if (loading) {
   //   return (
   //     <Layout>
@@ -150,10 +148,11 @@ function AllProducts() {
   // }
 
   useEffect(() => {
-    if (!session) {
-      router(`/login?next=${"/products"}`);
-    }
-  }, [router, session]);
+    // if (!session) {
+    //   router(`/login?next=${"/products"}`);
+    // }
+    console.log(session);
+  }, []);
 
   return (
     <>
