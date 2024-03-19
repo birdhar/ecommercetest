@@ -201,6 +201,7 @@
   display: flex;
   justify-content: space-between;
 }
+
 .addressdiv h6 {
   font-size: 1.1rem;
   color: #696c6f;
@@ -262,6 +263,9 @@
 @media only screen and (max-width: 625px) {
   .orderresponse {
     padding: 1rem;
+  }
+  .addressdiv {
+    margin-top: 2rem;
   }
   .ordermsgflex {
     flex-wrap: wrap;
