@@ -26,7 +26,7 @@ function Home(params) {
       (status === "authenticated" && !session) ||
       status === "unauthenticated"
     ) {
-      router.push(`/login?next=${"/products"}`);
+      router.push(`/login?next=${"/"}`);
     }
   }, [session, status]);
   return (
