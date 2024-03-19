@@ -88,6 +88,7 @@ function Profile() {
       router.push(`/login?next=${router?.asPath}`);
     }
   }, [session, status]);
+
   return (
     <>
       <Head>

@@ -10,7 +10,7 @@ function Sidebar() {
   const handleSignOut = () => {
     signOut();
     localStorage.clear();
-    router.push("/login?next=/");
+    router.push("/login");
   };
   return (
     <div className={style.sidebar}>
