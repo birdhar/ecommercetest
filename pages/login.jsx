@@ -49,7 +49,12 @@ function Login() {
   };
 
   const handleGoogleSignIn = async () => {
-    await signIn("google", { callbackUrl: "/" });
+    const redirectTo = router?.asPath?.split("=")?.[1];
+    if (redirectTo) {
+      await signIn("google", { callbackUrl: redirectTo });
+    } else {
+      await signIn("google", { callbackUrl: "/" });
+    }
   };
 
   useEffect(() => {
