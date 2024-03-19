@@ -173,7 +173,7 @@ function Checkout() {
                     ...
                   </p>
                 </div>
-                <div>
+                <div className={style.productpriceflex}>
                   <p className={style.producttext}>
                     <IndianRupeeFormatter
                       amount={product?.price_data?.unit_amount}

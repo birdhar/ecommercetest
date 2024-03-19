@@ -254,7 +254,24 @@
     width: 100%;
   }
 }
-
+@media only screen and (max-width: 690px) {
+  .orderresponse {
+    padding: 2rem;
+  }
+}
+@media only screen and (max-width: 625px) {
+  .orderresponse {
+    padding: 1rem;
+  }
+  .ordermsgflex {
+    flex-wrap: wrap;
+  }
+}
+@media only screen and (max-width: 580px) {
+  .orderdataflex {
+    padding: 1rem;
+  }
+}
 @media only screen and (max-width: 540px) {
   .checkoutflex,
   .tabs {
@@ -271,5 +288,19 @@
   }
   .deliveryheading {
     font-size: 0.9rem;
+  }
+}
+@media only screen and (max-width: 448px) {
+  .orderdataflex {
+    flex-direction: column;
+    text-align: center;
+  }
+  .producttext {
+    margin-top: 0.75rem;
+  }
+  .productpriceflex {
+    display: flex;
+    width: 90%;
+    justify-content: space-between;
   }
 }
