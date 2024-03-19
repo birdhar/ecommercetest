@@ -10,8 +10,10 @@ import Link from "next/link";
 import { getSession, useSession } from "next-auth/react";
 import { Skeleton } from "@mui/material";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 function AllProducts() {
+  const router = useRouter();
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -146,6 +148,12 @@ function AllProducts() {
   //     </Layout>
   //   );
   // }
+
+  useEffect(() => {
+    if (!session) {
+      router(`/login?next=${"/products"}`);
+    }
+  }, [router, session]);
 
   return (
     <>
