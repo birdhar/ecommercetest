@@ -363,21 +363,22 @@ function AllProducts() {
   );
 }
 
-export async function getServerSideProps({ req }) {
-  //   const session = await getSession({ req });
-  //   if (!session) {
-  //     return {
-  //       redirect: {
-  //         destination: `/login?next=${"/products"}`,
-  //         permanent: false,
-  //       },
-  //     };
-  //   }
-  //   return {
-  //     props: {
-  //       session,
-  //     },
-  //   };
-}
+// export async function getServerSideProps({ req }) {
+//   const session = await getSession({ req });
+
+//   if (!session) {
+//     return {
+//       redirect: {
+//         destination: `/login?next=${"/products"}`,
+//         permanent: false,
+//       },
+//     };
+//   }
+//   return {
+//     props: {
+//       session,
+//     },
+//   };
+// }
 
 export default AllProducts;
