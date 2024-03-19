@@ -3,6 +3,8 @@ import Layout from "@/components/Layout";
 import { getSession, useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 import Head from "next/head";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 const HeroSection = dynamic(() => import("@/components/Herosection"));
 const LatestProducts = dynamic(() => import("@/components/LatestProducts"));
 const Notification = dynamic(() => import("@/components/Notification"));
@@ -10,6 +12,23 @@ const Categories = dynamic(() => import("@/components/Categories"));
 const AdSellFeature = dynamic(() => import("@/components/AdSellFeature"));
 
 function Home(params) {
+  const router = useRouter();
+  const { data: session, status } = useSession();
+  useEffect(() => {
+    // Check if the session has been loaded
+    if (status === "loading") {
+      // Session is still loading, do nothing
+      return;
+    }
+
+    // Now the session is loaded, you can use it
+    if (
+      (status === "authenticated" && !session) ||
+      status === "unauthenticated"
+    ) {
+      router.push(`/login?next=${"/products"}`);
+    }
+  }, [session, status]);
   return (
     <>
       <Head>
