@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { clearCart } from "@/redux/cartSlice";
 import { getSession, useSession } from "next-auth/react";
 import Head from "next/head";
+import { CircularProgress } from "@mui/material";
 
 function Checkout() {
   const router = useRouter();
@@ -64,13 +65,26 @@ function Checkout() {
       return;
     }
 
-    if (
-      (status === "authenticated" && !session) ||
-      status === "unauthenticated"
-    ) {
+    if (status === "unauthenticated" && !session) {
       router.push(`/login?next=${router?.asPath}`);
     }
-  }, [session, status]);
+  }, [session, status, router]);
+
+  if (status === "loading" || (!session && status === "unauthenticated")) {
+    return (
+      <div
+        style={{
+          width: "100vw",
+          height: "100vh",
+          display: "grid",
+          placeItems: "center",
+          background: "#fff",
+        }}
+      >
+        <CircularProgress />
+      </div>
+    );
+  }
 
   if (router?.query?.fail === "1") {
     return (

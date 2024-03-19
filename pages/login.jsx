@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { getSession, signIn } from "next-auth/react";
+import { getSession, signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { Notfication } from "@/validation/Snackbar";
 import Head from "next/head";
@@ -8,6 +8,7 @@ import Head from "next/head";
 function Login() {
   const router = useRouter();
   const { next } = router.query;
+  const { data: session, status } = useSession();
   const [notificationState, setNotificationState] = useState({
     msg: "",
     run: false,
@@ -29,7 +30,13 @@ function Login() {
       callbackUrl: "/",
     });
     if (res.ok) {
-      router.push("/");
+      const redirectTo = router?.asPath?.split("=")?.[1];
+      if (redirectTo) {
+        router.push(redirectTo);
+      } else {
+        router.push("/");
+      }
+
       setLoading(false);
     } else {
       setNotificationState({
@@ -44,6 +51,21 @@ function Login() {
   const handleGoogleSignIn = async () => {
     await signIn("google", { callbackUrl: "/" });
   };
+
+  useEffect(() => {
+    if (status === "loading") {
+      return;
+    }
+
+    if (session) {
+      const redirectTo = router?.asPath?.split("=")?.[1];
+      if (redirectTo) {
+        router.push(redirectTo);
+      } else {
+        router.push("/");
+      }
+    }
+  }, [session, status, router]);
 
   return (
     <>

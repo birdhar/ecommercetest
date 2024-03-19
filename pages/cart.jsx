@@ -16,6 +16,7 @@ import { getSession, useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 import useCartItems from "@/utils/useCartItems";
 import Head from "next/head";
+import { CircularProgress } from "@mui/material";
 
 function Cart() {
   const router = useRouter();
@@ -156,13 +157,26 @@ function Cart() {
       return;
     }
 
-    if (
-      (status === "authenticated" && !session) ||
-      status === "unauthenticated"
-    ) {
+    if (status === "unauthenticated" && !session) {
       router.push(`/login?next=${router?.asPath}`);
     }
-  }, [session, status]);
+  }, [session, status, router]);
+
+  if (status === "loading" || (!session && status === "unauthenticated")) {
+    return (
+      <div
+        style={{
+          width: "100vw",
+          height: "100vh",
+          display: "grid",
+          placeItems: "center",
+          background: "#fff",
+        }}
+      >
+        <CircularProgress />
+      </div>
+    );
+  }
 
   if (items?.length <= 0) {
     return (

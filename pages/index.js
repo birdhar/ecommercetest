@@ -1,7 +1,8 @@
 import Layout from "@/components/Layout";
 
-import { getSession, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
+import { CircularProgress } from "@mui/material";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
@@ -15,20 +16,31 @@ function Home(params) {
   const router = useRouter();
   const { data: session, status } = useSession();
   useEffect(() => {
-    // Check if the session has been loaded
     if (status === "loading") {
-      // Session is still loading, do nothing
       return;
     }
 
-    // Now the session is loaded, you can use it
-    if (
-      (status === "authenticated" && !session) ||
-      status === "unauthenticated"
-    ) {
+    if (status === "unauthenticated" && !session) {
       router.push(`/login?next=${"/"}`);
     }
-  }, [session, status]);
+  }, [session, status, router]);
+
+  if (status === "loading" || (!session && status === "unauthenticated")) {
+    return (
+      <div
+        style={{
+          width: "100vw",
+          height: "100vh",
+          display: "grid",
+          placeItems: "center",
+          background: "#fff",
+        }}
+      >
+        <CircularProgress />
+      </div>
+    );
+  }
+
   return (
     <>
       <Head>

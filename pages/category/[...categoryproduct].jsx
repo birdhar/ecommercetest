@@ -6,10 +6,12 @@ import style from "../../styles/Products.module.css";
 import React, { useEffect, useState } from "react";
 import { IndianRupeeFormatter } from "@/utils/IndianRupeeFormatter";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
+import { CircularProgress } from "@mui/material";
 
 function Categoryproduct() {
   const router = useRouter();
-
+  const { data: session, status } = useSession();
   const cat = router?.query?.categoryproduct?.[0];
   const [loading, setLoading] = useState(true);
   const [categories, setCategories] = useState([]);
@@ -109,6 +111,32 @@ function Categoryproduct() {
       setLoading(false);
     }
   }, [filteredItems, loading]);
+
+  useEffect(() => {
+    if (status === "loading") {
+      return;
+    }
+
+    if (status === "unauthenticated" && !session) {
+      router.push(`/login?next=${router?.asPath}`);
+    }
+  }, [session, status, router]);
+
+  if (status === "loading" || (!session && status === "unauthenticated")) {
+    return (
+      <div
+        style={{
+          width: "100vw",
+          height: "100vh",
+          display: "grid",
+          placeItems: "center",
+          background: "#fff",
+        }}
+      >
+        <CircularProgress />
+      </div>
+    );
+  }
 
   return (
     <Layout>

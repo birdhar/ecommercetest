@@ -8,7 +8,7 @@ import { useInView } from "react-intersection-observer";
 import { IndianRupeeFormatter } from "@/utils/IndianRupeeFormatter";
 import Link from "next/link";
 import { getSession, useSession } from "next-auth/react";
-import { Skeleton } from "@mui/material";
+import { CircularProgress, Skeleton } from "@mui/material";
 import Head from "next/head";
 import { useRouter } from "next/router";
 
@@ -155,13 +155,26 @@ function AllProducts() {
     }
 
     // Now the session is loaded, you can use it
-    if (
-      (status === "authenticated" && !session) ||
-      status === "unauthenticated"
-    ) {
+    if (status === "unauthenticated" && !session) {
       router.push(`/login?next=${"/products"}`);
     }
-  }, [session, status]);
+  }, [session, status, router]);
+
+  if (status === "loading" || (!session && status === "unauthenticated")) {
+    return (
+      <div
+        style={{
+          width: "100vw",
+          height: "100vh",
+          display: "grid",
+          placeItems: "center",
+          background: "#fff",
+        }}
+      >
+        <CircularProgress />
+      </div>
+    );
+  }
 
   return (
     <>

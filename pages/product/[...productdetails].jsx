@@ -11,6 +11,7 @@ import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
 import { addProductToCart } from "@/redux/cartSlice";
 import Head from "next/head";
+import { CircularProgress } from "@mui/material";
 
 function ProductDetails() {
   const router = useRouter();
@@ -66,13 +67,26 @@ function ProductDetails() {
       return;
     }
 
-    if (
-      (status === "authenticated" && !session) ||
-      status === "unauthenticated"
-    ) {
+    if (status === "unauthenticated" && !session) {
       router.push(`/login?next=${router?.asPath}`);
     }
-  }, [session, status]);
+  }, [session, status, router]);
+
+  if (status === "loading" || (!session && status === "unauthenticated")) {
+    return (
+      <div
+        style={{
+          width: "100vw",
+          height: "100vh",
+          display: "grid",
+          placeItems: "center",
+          background: "#fff",
+        }}
+      >
+        <CircularProgress />
+      </div>
+    );
+  }
 
   return (
     <>
