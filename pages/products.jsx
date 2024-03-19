@@ -49,15 +49,15 @@ function AllProducts() {
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
 
-  // useEffect(() => {
-  //   if (inView && hasMore) {
-  //     setPage((prev) => (prev = prev + 1));
-  //   }
-  // }, [inView, hasMore]);
+  useEffect(() => {
+    if (inView && hasMore) {
+      setPage((prev) => (prev = prev + 1));
+    }
+  }, [inView, hasMore]);
 
-  // useEffect(() => {
-  //   fetchData(page);
-  // }, [page]);
+  useEffect(() => {
+    fetchData(page);
+  }, [page]);
 
   const fetchData = useCallback(async (page, pageSize = 10) => {
     setLoading(true);
