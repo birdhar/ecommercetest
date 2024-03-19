@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { IndianRupeeFormatter } from "@/utils/IndianRupeeFormatter";
-import { getSession } from "next-auth/react";
+import { getSession, useSession } from "next-auth/react";
 import { pincodes } from "@/constatns/constatnt";
 import { Notfication } from "@/validation/Snackbar";
 import Link from "next/link";
@@ -14,7 +14,7 @@ import Head from "next/head";
 
 function ProductDetails() {
   const router = useRouter();
-
+  const { data: session, status } = useSession();
   const regex = /^[0-9]+$/;
   const dispatch = useDispatch();
   const { items } = useSelector((store) => store.cart);
@@ -59,6 +59,22 @@ function ProductDetails() {
       dispatch(addProductToCart({ info: product, count: 1 }));
     }
   };
+
+  useEffect(() => {
+    // Check if the session has been loaded
+    if (status === "loading") {
+      // Session is still loading, do nothing
+      return;
+    }
+
+    // Now the session is loaded, you can use it
+    if (
+      (status === "authenticated" && !session) ||
+      status === "unauthenticated"
+    ) {
+      router.push(`/login?next=${router?.asPath}`);
+    }
+  }, [session, status]);
 
   return (
     <>
