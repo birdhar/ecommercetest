@@ -1,13 +1,18 @@
 import * as React from "react";
+import { useEffect, useState } from "react";
 import { signOut } from "next-auth/react";
 import style from "../styles/Drawer.module.css";
 import { Drawer } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import axios from "axios";
 
 export default function Sidebar({ open, onClose }) {
   const anchor = "right";
   const router = useRouter();
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredItems, setFilteredItems] = useState([]);
+  const [categories, setCategories] = useState([]);
   const toggleDrawer = (anchor, open) => (event) => {
     if (
       event.type === "keydown" &&
@@ -22,6 +27,43 @@ export default function Sidebar({ open, onClose }) {
     signOut();
     localStorage.clear();
     router.push("/login?next=/");
+  };
+
+  const [notificationState, setNotificationState] = useState({
+    msg: "",
+    run: false,
+    status: "error",
+  });
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
+  const fetchCategories = async () => {
+    try {
+      const res = await axios.get("/api/categories");
+
+      setCategories(res.data);
+    } catch (error) {
+      setNotificationState({
+        msg: error?.response?.data?.error ?? "Unauthorized access",
+        run: true,
+        status: "error",
+      });
+    }
+  };
+  useEffect(() => {
+    const delay = setTimeout(() => {
+      const filtered = categories?.filter((item) =>
+        item?.name?.toLowerCase()?.includes(searchQuery?.toLowerCase())
+      );
+      setFilteredItems(filtered);
+    }, 1000);
+
+    return () => clearTimeout(delay);
+  }, [searchQuery, categories]);
+  const handleClickRoute = (url) => {
+    router.push(url);
   };
 
   const list = (anchor) => (
@@ -59,12 +101,36 @@ export default function Sidebar({ open, onClose }) {
             </Link>
           </div>
           <div className={style.searchbar}>
-            <input
-              type="search"
-              className="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-[0.8rem] font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
-              id="exampleSearch"
-              placeholder="Search..."
-            />
+            <div className={style.searchbarinner}>
+              <input
+                type="search"
+                className="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-[0.8rem] font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
+                id="exampleSearch"
+                placeholder="Search..."
+                value={searchQuery}
+                onChange={(e) => {
+                  setFilteredItems([]);
+                  setSearchQuery(e.target.value);
+                }}
+              />
+            </div>
+
+            {searchQuery !== "" && (
+              <ul className="absolute z-10 border top-[2rem] w-full max-h-[70vh] overflow-y-scroll">
+                {filteredItems?.map((cat) => (
+                  <li
+                    key={cat?._id}
+                    className="border-b p-2 text-neutral-700 cursor-pointer text-[0.8rem] bg-white"
+                    onClick={() => {
+                      handleClickRoute(`/category/${cat?.name}`);
+                      onClose();
+                    }}
+                  >
+                    {cat?.name}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
           <ul className={style.drawerlist}>
             <li className={style.listitem}>

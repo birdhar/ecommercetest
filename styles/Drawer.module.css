@@ -33,6 +33,11 @@
 }
 .searchbar {
   padding: 0.5rem;
+  position: relative;
+}
+.searchbarinner {
+  width: 100%;
+  position: absolute;
 }
 .cartimg {
   color: #f2295b;
